@@ -1,0 +1,46 @@
+/*
+ * Copyright (c) 2024 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+ */
+
+/delete-node/ &cpuapp_data;
+
+ / {
+	chosen {
+		zephyr,sram = &cpuapp_tcm_region;
+	};
+
+	reserved-memory {
+		cpuapp_tcm_region: memory@22000000 {
+			compatible = "nordic,owned-memory";
+			reg = <0x22000000 DT_SIZE_K(32)>;
+			status = "okay";
+			perm-read;
+			perm-write;
+			perm-secure;
+			#address-cells = <1>;
+			#size-cells = <1>;
+			ranges = <0x0 0x22000000 0x8000>;
+		};
+	};
+};
+
+&cpuapp_ram0x_region {
+	/* Test block aligned to dcache size (16KB) */
+	test_mem_block0: memory@4000 {
+		reg = <0x4000 DT_SIZE_K(16)>;
+	};
+
+	test_mem_block1: memory@8000 {
+		reg = <0x8000 DT_SIZE_K(16)>;
+	};
+
+	test_mem_block2: memory@C000 {
+		reg = <0xC000 DT_SIZE_K(16)>;
+	};
+
+	test_mem_block3: memory@10000 {
+		reg = <0x10000 DT_SIZE_K(16)>;
+	};
+};
