@@ -16,7 +16,7 @@
  */
 LOG_MODULE_REGISTER(uarte_suspend);
 
-static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led), gpios);
+//static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led), gpios);
 
 #if DT_NODE_EXISTS(DT_NODELABEL(dut))
 #define UART_NODE DT_NODELABEL(dut)
@@ -107,11 +107,11 @@ int main(void)
 {
 	int err;
 
-	err = gpio_is_ready_dt(&led);
-	__ASSERT(err, "Error: GPIO Device not ready");
+	//err = gpio_is_ready_dt(&led);
+	//__ASSERT(err, "Error: GPIO Device not ready");
 
-	err = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
-	__ASSERT(err == 0, "Could not configure led GPIO");
+	//err = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
+	//__ASSERT(err == 0, "Could not configure led GPIO");
 
 	printk("Hello World! %s\n", CONFIG_BOARD_TARGET);
 	printk("UART instance: %s\n", uart_dev->name);
@@ -136,9 +136,9 @@ int main(void)
 		disable_uart_rx();
 		err = pm_device_action_run(uart_dev, PM_DEVICE_ACTION_SUSPEND);
 		printk("Good night\n");
-		gpio_pin_set_dt(&led, 0);
+		//gpio_pin_set_dt(&led, 0);
 		k_msleep(1000);
-		gpio_pin_set_dt(&led, 1);
+		//gpio_pin_set_dt(&led, 1);
 		err = pm_device_action_run(uart_dev, PM_DEVICE_ACTION_RESUME);
 	}
 

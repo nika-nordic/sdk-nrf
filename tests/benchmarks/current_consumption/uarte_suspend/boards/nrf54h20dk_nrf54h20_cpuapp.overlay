@@ -53,5 +53,104 @@ dut: &uart135 {
 };
 
 &gdpwr_slow_main {
-	/delete-property/zephyr,pm-device-runtime-auto;
+	zephyr,pm-device-runtime-auto;
+};
+
+// Attempts
+
+&fll16m {
+	status = "disabled";
+};
+
+&hsfll120 {
+	status = "disabled";
+};
+
+&gpio0 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio1 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio2 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio6 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio7 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio9 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr {
+	status = "okay";
+};
+
+&gdpwr_fast_active_0 {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr_fast_active_1 {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr_fast_main {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr_slow_active {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr_slow_main {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group0 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group1 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group2 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group6 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group7 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group9 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
 };

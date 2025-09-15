@@ -6,9 +6,11 @@
 
 / {
 	aliases {
-		led = &led1;
+		/*led = &led1;*/
+		/delete-property/ led1;
 	};
 
+/*
 	leds {
 		compatible = "gpio-leds";
 		led1: led_1 {
@@ -16,17 +18,117 @@
 			label = "Green LED 1";
 		};
 	};
+*/
 };
 
 &gpio9 {
-	status = "okay";
+	status = "disabled";
 };
 
 &gpiote130 {
-	status = "okay";
+	status = "disabled";
 };
 
 &uart135 {
 	status = "disabled";
 	/delete-property/memory-regions;
+};
+
+// Attempts
+
+&fll16m {
+	status = "disabled";
+};
+
+&hsfll120 {
+	status = "disabled";
+};
+
+&gpio0 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio1 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio2 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio6 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio7 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio9 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr {
+	status = "okay";
+};
+
+&gdpwr_fast_active_0 {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr_fast_active_1 {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr_fast_main {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr_slow_active {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gdpwr_slow_main {
+	status = "okay";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group0 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group1 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group2 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group6 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group7 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
+};
+
+&gpio_pad_group9 {
+	status = "disabled";
+	zephyr,pm-device-runtime-auto;
 };
