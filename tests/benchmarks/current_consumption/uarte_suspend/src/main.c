@@ -10,6 +10,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/gpio.h>
+#include <nrf/gpd.h>
 
 /* Note: logging is normally disabled for this test
  * Enable only for debugging purposes
@@ -53,8 +54,8 @@ static void async_uart_callback(const struct device *dev, struct uart_event *evt
 	case UART_RX_RDY:
 		printk("UART_RX_RDY\n");
 		for (int index = 0; index < TEST_BUFFER_LEN; index++) {
-			printk("test_pattern[%d]=%d\n", index, test_pattern[index]);
-			printk("test_buffer[%d]=%d\n", index, test_buffer[index]);
+			//printk("test_pattern[%d]=%d\n", index, test_pattern[index]);
+			//printk("test_buffer[%d]=%d\n", index, test_buffer[index]);
 			if (test_buffer[index] != test_pattern[index]) {
 				printk("Recieived data byte %d does not match pattern 0x%x != "
 				       "0x%x\n",
@@ -140,9 +141,13 @@ int main(void)
 		}
 		disable_uart_rx();
 		err = pm_device_action_run(uart_dev, PM_DEVICE_ACTION_SUSPEND);
-		printk("Good night\n");
+		printk("Good night. NRF_P0->RETAIN=0x%x\n", NRF_P0->RETAIN);
 		gpio_pin_set_dt(&led, 0);
+		//uncomment to re-create 13uA idle current issue on main
+		//nrf_gpd_request(NRF_GPD_SLOW_ACTIVE);
 		k_msleep(1000);
+		//uncomment to re-create 13uA idle current issue on main
+		//nrf_gpd_release(NRF_GPD_SLOW_ACTIVE);
 		gpio_pin_set_dt(&led, 1);
 		err = pm_device_action_run(uart_dev, PM_DEVICE_ACTION_RESUME);
 	}
