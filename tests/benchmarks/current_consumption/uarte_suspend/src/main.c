@@ -28,6 +28,8 @@ static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led), gpios);
 #define TEST_BUFFER_LEN		    10
 
 static const struct device *const uart_dev = DEVICE_DT_GET(UART_NODE);
+static const struct device *const uart_dev_gdpwr = DEVICE_DT_GET(DT_NODELABEL(gdpwr_slow_active));
+static const struct device *const gpio_dev_gdpwr = DEVICE_DT_GET(DT_NODELABEL(gdpwr_slow_main));
 
 const uint8_t test_pattern[TEST_BUFFER_LEN] = {0x11, 0x12, 0x13, 0x14, 0x15,
 					       0x16, 0x17, 0x18, 0x19, 0x20};
@@ -137,7 +139,13 @@ int main(void)
 		err = pm_device_action_run(uart_dev, PM_DEVICE_ACTION_SUSPEND);
 		printk("Good night\n");
 		gpio_pin_set_dt(&led, 0);
+		// Comment both pm_device_action_run() to see 13 uA idle current
+		err = pm_device_action_run(uart_dev_gdpwr, PM_DEVICE_ACTION_SUSPEND);
+		err = pm_device_action_run(gpio_dev_gdpwr, PM_DEVICE_ACTION_SUSPEND);
 		k_msleep(1000);
+		// Comment both pm_device_action_run() to see 13 uA idle current
+		err = pm_device_action_run(gpio_dev_gdpwr, PM_DEVICE_ACTION_RESUME);
+		err = pm_device_action_run(uart_dev_gdpwr, PM_DEVICE_ACTION_RESUME);
 		gpio_pin_set_dt(&led, 1);
 		err = pm_device_action_run(uart_dev, PM_DEVICE_ACTION_RESUME);
 	}
